@@ -1,0 +1,44 @@
+<div id="message">Number Guessing Game in HTML</div>
+<input type="number" id="yourInputId">
+<button id="guessButton">Guess</button>
+<p>Your past guesses:</p>
+<p id='pastEnter'></p>
+<script>
+	var min = 1;
+	var max = 100;
+	var yourRandomNumber = Math.ceil(Math.random() * (+max - +min)) + +min;
+	let button = document.getElementById('guessButton');
+	var pastResult = '';
+	var count = 10;
+	button.addEventListener('click', function()
+	{
+		count--;
+		if(count == 0)
+		{
+			alert('anwser: '+yourRandomNumber);
+			location.reload();
+		}
+		let userGuess = document.getElementById('yourInputId').value;
+		if(userGuess < yourRandomNumber)
+		{
+			let lowGuess = document.getElementById('message').innerHTML = 'Sorry your guess is too low.';
+			document.getElementById('message').style.color = 'red';
+			document.getElementById('message').innerHTML = lowGuess + ' You have '+count+' guesses left';
+		}
+		else if(userGuess > yourRandomNumber)
+		{
+			let highGuess = document.getElementById('message').innerHTML = 'Sorry your guess is too high.';
+			document.getElementById('message').style.color = 'red';
+			document.getElementById('message').innerHTML = highGuess + ' You have '+count+' guesses left';
+		}
+		else if(userGuess == yourRandomNumber)
+		{
+			document.getElementById('message').innerHTML = 'Congratulations!! You guessed correctly.';
+			document.getElementById('message').style.color = 'green';
+		}
+		pastResult += userGuess + '  '
+		document.getElementById('pastEnter').innerHTML = pastResult;
+		
+	});
+	
+</script>
